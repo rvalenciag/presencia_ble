@@ -34,6 +34,14 @@ export class DSesion {
         return (resultado.rows as Record<string, unknown>[]).map(DSesion.desdeFila);
     }
 
+    // Devuelve una sesión por su id (CU11 la resuelve para escanear; CU10 lee el
+    // espejo local tras el ACK) o null si no existe
+    static obtenerSesionPorId(idSesion: number): DSesion | null {
+        const resultado = baseDatos.executeSync('SELECT * FROM sesion WHERE id = ?;', [idSesion]);
+        const filas = resultado.rows as Record<string, unknown>[];
+        return filas.length > 0 ? DSesion.desdeFila(filas[0]) : null;
+    }
+
     // Crea una sesión con estado ABIERTA y fecha/hora automática (CU09: Abrir Sesión)
     static crearSesion(idGrupo: number, titulo: string): DSesion {
         const resultado = baseDatos.executeSync(

@@ -1,8 +1,10 @@
 // El transporte Bluetooth BLE de la app: estado del adaptador + código/decodigo de
 // los paquetes del protocolo y su emisión/escaneo (diseno-ble.md, ADR-016).
-// Lo usan CU01 (ADR-012) y los flujos BLE de CU05/CU06 (la fase BLE).
+// Servicio transversal (ADR-018): vive en Negocio/Servicio y es el único módulo
+// que los N de dominio pueden importar (ningún N importa a otro N).
+// Lo usan CU01 (ADR-012) y los flujos BLE de CU05/CU06/CU10/CU11.
 // Regla: aquí vive el "idioma" entre teléfonos; la lógica de cada caso de uso
-// (qué se hace con cada canal) queda en NEnrolamiento / NVinculacion.
+// (qué se hace con cada canal) queda en su N.
 
 import { BleManager, ScanMode, State } from '@sfourdrinier/react-native-ble-plx';
 import type { Device } from '@sfourdrinier/react-native-ble-plx';
@@ -46,8 +48,15 @@ export type CanalMeta = {
 };
 // El estudiante emite su credencial [uuid del teléfono + registro de 1 a 9 dígitos]
 export type CanalIdentidad = { canal: 'IDENTIDAD'; uuid: string; registro: number };
-// El docente confirma (ACEPTADO/RECHAZADO) dirigiéndose al uuid de ese estudiante
-export type CanalRespuesta = { canal: 'RESPUESTA'; uuid: string; aceptado: boolean };
+// El docente confirma (ACEPTADO/RECHAZADO) dirigiéndose al uuid de ese estudiante.
+// En el ACK de asistencia (CU11) el minor lleva el idSesion marcado; el enrolamiento
+// (CU05/CU06) deja minor en 0 porque todavía no hay sesión.
+export type CanalRespuesta = {
+    canal: 'RESPUESTA';
+    uuid: string;
+    aceptado: boolean;
+    idSesion?: number;
+};
 
 export type CanalBLE = CanalMateria | CanalMeta | CanalIdentidad | CanalRespuesta;
 
@@ -105,8 +114,17 @@ function canalEnBytes(canal: CanalBLE): { uuid: string; major: number; minor: nu
             minor: canal.registro % 65536,
         };
     }
-    // RESPUESTA: eco del uuid del estudiante + resultado en el bit 15 del major
-    return { uuid: canal.uuid, major: BITS_RESPUESTA | (canal.aceptado ? 1 : 0), minor: 0 };
+    // RESPUESTA: eco del uuid del estudiante + resultado en el bit 15 del major.
+    // El minor lleva el idSesion del ACK de asistencia (CU11); el enrolamiento usa 0.
+    const idSesion = canal.idSesion ?? 0;
+    if (idSesion > 0xffff) {
+        console.warn('[BluetoothServicio] idSesion > 16 bits, se trunca en el ACK', idSesion);
+    }
+    return {
+        uuid: canal.uuid,
+        major: BITS_RESPUESTA | (canal.aceptado ? 1 : 0),
+        minor: idSesion & 0xffff,
+    };
 }
 
 // ─── Decodificación ───
@@ -140,7 +158,12 @@ function decodificarManufacturerData(bytes: Uint8Array): CanalBLE | null {
     }
     const uuid = bytesAUuid(uuidBytes);
     if ((major & BITS_RESPUESTA) !== 0) {
-        return { canal: 'RESPUESTA', uuid, aceptado: (major & 1) === 1 };
+        return {
+            canal: 'RESPUESTA',
+            uuid,
+            aceptado: (major & 1) === 1,
+            idSesion: minor >= 1 ? minor : undefined,
+        };
     }
     // Sin marcador y sin flag de respuesta: solo puede ser una identidad [registro+uuid].
     // major+minor son 32 bits: alcanzan hasta 999 999 999 (nueve dígitos).
@@ -349,7 +372,7 @@ export function iniciarEscaneo(alRecibir: (canal: CanalBLE, rssi: number) => voi
     const callback = (error: unknown, dispositivo: Device | null) => {
         if (error) {
             const mensaje = error instanceof Error ? error.message : String(error);
-            console.warn('[NBluetooth] error de escaneo, se reintenta en breve: ' + mensaje);
+            console.warn('[BluetoothServicio] error de escaneo, se reintenta en breve: ' + mensaje);
             if (activo && reinicio == null) {
                 reinicio = setTimeout(() => {
                     reinicio = null;
@@ -401,7 +424,7 @@ export async function emitirCanal(canal: CanalBLE): Promise<boolean> {
     // verifica (barato: no re-abre el diálogo si ya fue decidido) antes de emitir.
     if (Platform.OS === 'android' && !(await permisosBluetoothBLE())) {
         console.warn(
-            '[NBluetooth] sin permiso de emisión (BLUETOOTH_ADVERTISE): no se anuncia el canal',
+            '[BluetoothServicio] sin permiso de emisión (BLUETOOTH_ADVERTISE): no se anuncia el canal',
             canal,
         );
         return false;
@@ -419,7 +442,7 @@ export async function emitirCanal(canal: CanalBLE): Promise<boolean> {
     } catch (error) {
         // No ocultar los fallos de emisión: si algo falla en el teléfono debe
         // verse en la consola (Metro) en vez de emitir "en falso".
-        console.warn('[NBluetooth] falló la emisión del canal', canal, error);
+        console.warn('[BluetoothServicio] falló la emisión del canal', canal, error);
         return false;
     }
 }

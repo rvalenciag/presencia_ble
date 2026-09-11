@@ -121,10 +121,7 @@ export function PGestionarSesiones() {
     };
 
     const irAEscanear = (sesion: DSesion) => {
-        Alert.alert(
-            'Módulo en desarrollo',
-            `La toma de asistencia para "${sesion.nombre}" corresponde a los módulos CU10–CU11.`,
-        );
+        router.push({ pathname: '/escanear-asistencia', params: { sesionId: String(sesion.id) } });
     };
 
     const verAsistencias = (sesion: DSesion) => {

@@ -21,6 +21,7 @@ export function VistaMisGrupos({
     isRefreshing,
     onRefrescar,
     onEntrarAlGrupo,
+    onTransmitirPresencia,
     onDesvincular,
     onVincular,
     onConfigurarPerfil,
@@ -98,6 +99,12 @@ export function VistaMisGrupos({
                                     variante="secundario"
                                     compacto
                                     onPulsar={onEntrarAlGrupo}
+                                />
+                                <BotonAccion
+                                    titulo="Transmitir Presencia"
+                                    variante="exito"
+                                    compacto
+                                    onPulsar={() => onTransmitirPresencia(item)}
                                 />
                             </TarjetaPrensa>
                         )}

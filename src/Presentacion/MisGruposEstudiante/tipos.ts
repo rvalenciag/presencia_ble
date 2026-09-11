@@ -10,6 +10,8 @@ export interface PropsVistaMisGrupos {
     isRefreshing: boolean;
     onRefrescar: () => void;
     onEntrarAlGrupo: () => void;
+    // CU10: cada tarjeta avisa al orquestador qué materia transmitir presencia
+    onTransmitirPresencia: (grupo: GrupoEstudiante) => void;
     // CU08: la papelera de cada tarjeta avisa al orquestador qué materia desvincular
     onDesvincular: (grupo: GrupoEstudiante) => void;
     onVincular: () => void;

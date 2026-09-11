@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { DPerfil } from '@/Datos/DPerfil';
 import { DEstudiante } from '@/Datos/DEstudiante';
 import { DDispositivo } from '@/Datos/DDispositivo';
-import { escucharEstadoBluetooth, obtenerEstadoBluetooth } from '@/Negocio/NBluetooth';
+import { escucharEstadoBluetooth, obtenerEstadoBluetooth } from '@/Negocio/Servicio/BluetoothServicio';
 
 // Tipos que las vistas del CU01 importan desde Negocio (versión publicada de Datos)
 export type { DPerfil, Rol } from '@/Datos/DPerfil';

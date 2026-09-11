@@ -76,6 +76,12 @@ export function PMisGruposEstudiante() {
                 isRefreshing={isRefreshing}
                 onRefrescar={refrescarGrupos}
                 onEntrarAlGrupo={entrarAlGrupo}
+                onTransmitirPresencia={(grupo) =>
+                    router.push({
+                        pathname: '/transmitir-presencia',
+                        params: { grupoId: String(grupo.id) },
+                    })
+                }
                 onDesvincular={setGrupoEnModal}
                 onVincular={() => router.push('/vincular-dispositivo')}
                 onConfigurarPerfil={() => router.navigate('/')}

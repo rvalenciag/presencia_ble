@@ -18,8 +18,8 @@ import {
     iniciarEscaneo,
     detenerEmision,
     permisosBluetoothBLE,
-} from '@/Negocio/NBluetooth';
-import type { CanalBLE } from '@/Negocio/NBluetooth';
+} from '@/Negocio/Servicio/BluetoothServicio';
+import type { CanalBLE } from '@/Negocio/Servicio/BluetoothServicio';
 
 // Tipos que las vistas de CU06 importan desde Negocio
 export type { DPerfil } from '@/Datos/DPerfil';
@@ -216,7 +216,7 @@ export function useVinculacion(): RespuestaUseVinculacion {
     const seleccionarMateria = useCallback(
         async (materia: MateriaDetectada): Promise<boolean> => {
             if (!/^[1-9]\d{0,8}$/.test(registroEstudiante)) {
-                // No se emite un paquete que NBluetooth descartaría en el docente.
+                // No se emite un paquete que BluetoothServicio descartaría en el docente.
                 // Se entrega un rechazo claro en la vista en vez de aparentar que
                 // falló la radio o los permisos.
                 respuestaEntregada.current = true;

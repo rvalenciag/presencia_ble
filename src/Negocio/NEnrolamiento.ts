@@ -22,14 +22,14 @@ import {
     permisosBluetoothBLE,
     chunksDeTextoMeta,
     textoMetaDeGrupo,
-} from '@/Negocio/NBluetooth';
+} from '@/Negocio/Servicio/BluetoothServicio';
 import type {
     CanalBLE,
     CanalIdentidad,
     CanalMateria,
     CanalMeta,
     CanalRespuesta,
-} from '@/Negocio/NBluetooth';
+} from '@/Negocio/Servicio/BluetoothServicio';
 
 // Tipos que las vistas de CU05 importan desde Negocio
 export type { AlumnoEnrolamiento } from '@/Datos/DEstudiante';
