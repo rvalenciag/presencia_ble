@@ -1,7 +1,7 @@
 // Tema: grupos (espejo de las tablas grupo y grupo_estudiante).
 // CU02: Gestionar Grupos (lado docente) — implementación real (DGrupo).
-// CU07: Consultar Grupos Vinculados (lado estudiante) — real desde el slice BLE;
-//       CU08 (Desvincular) llega en un slice posterior y queda como stub.
+// CU07: Consultar Grupos Vinculados y CU08: Desvincular Grupo (lado estudiante),
+//       ambos reales y basados en DGrupoEstudiante.
 // Un solo hook: useGrupos atiende ambas caras y recibe el registro del estudiante
 // para listar sus materias; el saludo de la pantalla estudiante toma su perfil de
 // NPerfil (usePerfil) y no enreda a NGrupo con DPerfil.
@@ -31,7 +31,8 @@ export interface RespuestaUseGrupos {
     // CU07/CU08 (lado estudiante): los grupos vinculados al registro de este estudiante
     misGrupos: GrupoEstudiante[];
     refrescarMisGrupos: () => void;
-    vaciarGrupos?: () => void;
+    // CU08: desvincula la materia del estudiante (true si se logró, false si falló)
+    desvincularGrupo: (idGrupo: number) => boolean;
 }
 
 export function useGrupos(registroEstudiante?: string | null): RespuestaUseGrupos {
@@ -89,6 +90,23 @@ export function useGrupos(registroEstudiante?: string | null): RespuestaUseGrupo
         setMisGrupos(registro ? DGrupoEstudiante.listarMisGrupos(registro) : []);
     }, [registro]);
 
+    // CU08: marca la materia como desvinculada; si la base falla, Negocio no deja
+    // que el error llegue a la vista: avisa con false y el orquestador decide.
+    const desvincularGrupo = useCallback(
+        (idGrupo: number): boolean => {
+            if (registro == null) return false;
+            try {
+                DGrupoEstudiante.desvincularGrupo(idGrupo, registro);
+                refrescarMisGrupos();
+                return true;
+            } catch (error) {
+                console.warn('[NGrupo] No se pudo desvincular el grupo: ' + String(error));
+                return false;
+            }
+        },
+        [registro, refrescarMisGrupos],
+    );
+
     return {
         grupos,
         conteoPorGrupo,
@@ -97,6 +115,6 @@ export function useGrupos(registroEstudiante?: string | null): RespuestaUseGrupo
         eliminarGrupo,
         misGrupos,
         refrescarMisGrupos,
-        vaciarGrupos: undefined,
+        desvincularGrupo,
     };
 }

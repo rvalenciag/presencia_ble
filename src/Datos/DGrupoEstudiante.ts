@@ -50,6 +50,34 @@ export class DGrupoEstudiante {
         );
     }
 
+    // Desvincula al estudiante de una materia (CU08). En una transacción marca el
+    // vínculo como CANCELADO (las consultas ya lo excluyen de "Mis Grupos") y limpia
+    // los registros locales de esa asignatura (sesiones y su historial de asistencias
+    // que quedaron en el dispositivo).
+    static desvincularGrupo(idGrupo: number, registroEstudiante: string): void {
+        const idEstudiante = this.idDelRegistro(registroEstudiante);
+        if (idEstudiante == null) return;
+        baseDatos.executeSync('BEGIN TRANSACTION;');
+        try {
+            baseDatos.executeSync(
+                `UPDATE grupo_estudiante
+                    SET estado_vinculacion = 'CANCELADO'
+                  WHERE id_grupo = ? AND id_estudiante = ?;`,
+                [idGrupo, idEstudiante],
+            );
+            baseDatos.executeSync(
+                `DELETE FROM asistencia
+                  WHERE id_sesion IN (SELECT id FROM sesion WHERE id_grupo = ?);`,
+                [idGrupo],
+            );
+            baseDatos.executeSync('DELETE FROM sesion WHERE id_grupo = ?;', [idGrupo]);
+            baseDatos.executeSync('COMMIT;');
+        } catch (error) {
+            baseDatos.executeSync('ROLLBACK;');
+            throw error;
+        }
+    }
+
     // Lista las materias a las que el estudiante está vinculado (CU07, "Mis Grupos");
     // sin las CANCELADO, ordenadas por nombre de la materia.
     static listarMisGrupos(registroEstudiante: string): GrupoEstudiante[] {

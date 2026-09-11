@@ -27,6 +27,7 @@ type PropsVistaListaEstudiantes = {
     onEditar: (alumno: AlumnoDeGrupo) => void;
     onQuitar: (registro: string) => void;
     onHabilitarEnrolamiento: () => void;
+    onGestionarSesiones: () => void;
 };
 
 export function VistaListaEstudiantes({
@@ -38,6 +39,7 @@ export function VistaListaEstudiantes({
     onEditar,
     onQuitar,
     onHabilitarEnrolamiento,
+    onGestionarSesiones,
 }: PropsVistaListaEstudiantes) {
     const theme = useTheme();
 
@@ -162,6 +164,12 @@ export function VistaListaEstudiantes({
                                 compacto
                                 variante="secundario"
                                 onPulsar={onImportar}
+                            />
+                            <BotonAccion
+                                titulo="Sesiones"
+                                compacto
+                                variante="secundario"
+                                onPulsar={onGestionarSesiones}
                             />
                         </View>
                         <BotonAccion

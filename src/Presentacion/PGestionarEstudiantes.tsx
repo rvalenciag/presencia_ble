@@ -171,6 +171,12 @@ export function PGestionarEstudiantes() {
                     params: { grupoId: String(grupo.id) },
                 })
             }
+            onGestionarSesiones={() =>
+                router.push({
+                    pathname: '/gestionar-sesiones',
+                    params: { grupoId: String(grupo.id) },
+                })
+            }
         />
     );
 }

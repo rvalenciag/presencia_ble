@@ -21,6 +21,7 @@ export function VistaMisGrupos({
     isRefreshing,
     onRefrescar,
     onEntrarAlGrupo,
+    onDesvincular,
     onVincular,
     onConfigurarPerfil,
 }: PropsVistaMisGrupos) {
@@ -81,6 +82,16 @@ export function VistaMisGrupos({
                                 </Text>
                                 <View style={styles.filaMateria}>
                                     <Insignia texto={`Grupo ${item.sigla}`} tono="informacion" />
+                                    <Pressable
+                                        onPress={() => onDesvincular(item)}
+                                        hitSlop={8}
+                                        style={({ pressed }) => [
+                                            styles.botonPapelera,
+                                            { opacity: pressed ? 0.6 : 1 },
+                                        ]}
+                                    >
+                                        <Text style={styles.iconoPapelera}>🗑️</Text>
+                                    </Pressable>
                                 </View>
                                 <BotonAccion
                                     titulo="Entrar al Grupo"
@@ -144,7 +155,14 @@ const styles = StyleSheet.create({
     filaMateria: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         gap: Spacing.three - 2,
+    },
+    botonPapelera: {
+        padding: Spacing.two - 2,
+    },
+    iconoPapelera: {
+        fontSize: 18,
     },
     fab: {
         position: 'absolute',

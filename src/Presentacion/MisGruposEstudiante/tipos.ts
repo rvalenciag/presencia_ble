@@ -1,4 +1,4 @@
-// Tipos de la vista de Mis Grupos (CU07). Los tipos de dominio vienen de Negocio.
+// Tipos de la vista de Mis Grupos (CU07 y CU08). Los tipos de dominio vienen de Negocio.
 
 import type { GrupoEstudiante } from '@/Negocio/NGrupo';
 
@@ -10,6 +10,8 @@ export interface PropsVistaMisGrupos {
     isRefreshing: boolean;
     onRefrescar: () => void;
     onEntrarAlGrupo: () => void;
+    // CU08: la papelera de cada tarjeta avisa al orquestador qué materia desvincular
+    onDesvincular: (grupo: GrupoEstudiante) => void;
     onVincular: () => void;
     onConfigurarPerfil: () => void;
 }
