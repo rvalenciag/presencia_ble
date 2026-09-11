@@ -1,9 +1,9 @@
 // Orquestador del CU11 (Escanear Asistencia): resuelve la sesión y el grupo del
-// parámetro de ruta, conecta la vista con los hooks de Negocio y muestra el
-// resumen finalizado y las acciones de navegación (CU12 queda como placeholder).
+// parámetro de ruta, conecta la vista con los hooks de Negocio y navega a CU12
+// (lista completa y corrección manual) desde el resumen finalizado.
 
 import { useLocalSearchParams, router } from 'expo-router';
-import { Alert, Linking, StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useEscaneoAsistencia } from '@/Negocio/NEscanearAsistencia';
@@ -64,10 +64,10 @@ export function PEscanearAsistencia() {
             onDetenerEscaneo={detenerEscaneo}
             onAbrirAjustes={() => void Linking.openSettings()}
             onVerListaCompleta={() =>
-                Alert.alert(
-                    'Lista de Asistencia',
-                    `El historial completo de ${sesion.nombre} llegará con CU12 (pendiente).`,
-                )
+                router.push({
+                    pathname: '/gestionar-asistencia-manual',
+                    params: { sesionId: String(sesion.id) },
+                })
             }
             onVolverASesiones={() => router.back()}
         />

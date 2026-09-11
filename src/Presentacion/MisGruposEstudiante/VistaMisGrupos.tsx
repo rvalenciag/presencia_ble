@@ -98,7 +98,7 @@ export function VistaMisGrupos({
                                     titulo="Entrar al Grupo"
                                     variante="secundario"
                                     compacto
-                                    onPulsar={onEntrarAlGrupo}
+                                    onPulsar={() => onEntrarAlGrupo(item)}
                                 />
                                 <BotonAccion
                                     titulo="Transmitir Presencia"

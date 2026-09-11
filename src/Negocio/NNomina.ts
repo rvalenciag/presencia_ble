@@ -4,9 +4,10 @@
 // ADR-014: los tipos de la importación se toman aquí (versión publicada de Datos).
 
 import { useState } from 'react';
-import { File } from 'expo-file-system';
 import * as DocumentPicker from 'expo-document-picker';
 import * as XLSX from 'xlsx';
+
+import { leerBase64DeArchivo, leerTextoDeArchivo } from '@/Negocio/Servicio/ExcelCsvServicio';
 
 import { DEstudiante } from '@/Datos/DEstudiante';
 import { DGrupo } from '@/Datos/DGrupo';
@@ -156,14 +157,14 @@ function alumnosDeLaHoja(libro: XLSX.WorkBook): DEstudiante[] {
     return alumnos;
 }
 
-async function leerXlsx(archivo: File): Promise<DEstudiante[]> {
-    const contenido = await archivo.base64();
+async function leerXlsx(uri: string): Promise<DEstudiante[]> {
+    const contenido = await leerBase64DeArchivo(uri);
     const libro = XLSX.read(contenido, { type: 'base64' });
     return alumnosDeLaHoja(libro);
 }
 
-async function leerCsv(archivo: File): Promise<DEstudiante[]> {
-    const contenido = await archivo.text();
+async function leerCsv(uri: string): Promise<DEstudiante[]> {
+    const contenido = await leerTextoDeArchivo(uri);
     const libro = XLSX.read(contenido, { type: 'string' });
     return alumnosDeLaHoja(libro);
 }
@@ -204,9 +205,10 @@ export function useImportacion(idGrupo: number | null): RespuestaUseImportacion 
                 return false;
             }
 
-            const archivo = new File(archivoElegido.uri);
             const alumnosLeidos =
-                extension === 'csv' ? await leerCsv(archivo) : await leerXlsx(archivo);
+                extension === 'csv'
+                    ? await leerCsv(archivoElegido.uri)
+                    : await leerXlsx(archivoElegido.uri);
             if (alumnosLeidos.length === 0) {
                 setErrorMensaje(
                     'El archivo no contiene datos procesables. Verifica que tenga una columna para el Registro Universitario y otra para los Nombres.',

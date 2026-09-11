@@ -28,6 +28,8 @@ export function VistaListaSesiones({
     onBorrarSesion,
     onIrAEscanear,
     onVerAsistencias,
+    onVerHistorial,
+    onExportarReporte,
 }: PropsVistaListaSesiones) {
     const theme = useTheme();
     const [sesionModal, setSesionModal] = useState<DSesion | null>(null);
@@ -47,6 +49,24 @@ export function VistaListaSesiones({
                     onRegresar={onRegresar}
                     insignia={<Insignia texto={tituloGrupo} tono="informacion" />}
                 />
+                <View style={styles.filaAccionesGrupo}>
+                    <View style={styles.botonGrupo}>
+                        <BotonAccion
+                            titulo="Historial"
+                            variante="secundario"
+                            compacto
+                            onPulsar={onVerHistorial}
+                        />
+                    </View>
+                    <View style={styles.botonGrupo}>
+                        <BotonAccion
+                            titulo="Exportar"
+                            variante="secundario"
+                            compacto
+                            onPulsar={onExportarReporte}
+                        />
+                    </View>
+                </View>
 
                 {sesionActiva ? (
                     <View style={[styles.bannerActiva, { borderColor: Tonos.exito.solido }]}>
@@ -211,6 +231,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: Spacing.four,
         paddingVertical: Spacing.three,
         gap: Spacing.three - 2,
+    },
+    filaAccionesGrupo: {
+        flexDirection: 'row',
+        gap: Spacing.two,
+    },
+    botonGrupo: {
+        flex: 1,
     },
     cajaVacia: {
         flex: 1,

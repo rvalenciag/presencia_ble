@@ -125,10 +125,24 @@ export function PGestionarSesiones() {
     };
 
     const verAsistencias = (sesion: DSesion) => {
-        Alert.alert(
-            'Módulo en desarrollo',
-            `El historial de asistencias corresponde a los módulos CU13–CU14.`,
-        );
+        router.push({
+            pathname: '/gestionar-asistencia-manual',
+            params: { sesionId: String(sesion.id) },
+        });
+    };
+
+    const verHistorial = () => {
+        router.push({
+            pathname: '/historial-asistencias',
+            params: { grupoId: String(idGrupo) },
+        });
+    };
+
+    const exportarReporte = () => {
+        router.push({
+            pathname: '/exportar-reporte',
+            params: { grupoId: String(idGrupo) },
+        });
     };
 
     // --- Subvistas ---
@@ -160,6 +174,8 @@ export function PGestionarSesiones() {
                 onBorrarSesion={abrirBorrado}
                 onIrAEscanear={irAEscanear}
                 onVerAsistencias={verAsistencias}
+                onVerHistorial={verHistorial}
+                onExportarReporte={exportarReporte}
             />
             <ModalConfirmacion
                 visible={vista === 'MODAL_DELETE'}

@@ -42,11 +42,11 @@ export function PMisGruposEstudiante() {
         setTimeout(() => setIsRefreshing(false), 800);
     };
 
-    const entrarAlGrupo = () => {
-        Alert.alert(
-            'Aviso',
-            'El panel de la materia corresponde a los módulos siguientes (CU09–CU13).',
-        );
+    const entrarAlGrupo = (grupo: GrupoEstudiante) => {
+        router.push({
+            pathname: '/historial-asistencias',
+            params: { grupoId: String(grupo.id) },
+        });
     };
 
     const desvincular = () => {

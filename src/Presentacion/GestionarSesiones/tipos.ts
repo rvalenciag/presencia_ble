@@ -40,6 +40,8 @@ export type PropsVistaListaSesiones = {
     onBorrarSesion: (sesion: DSesion) => void;
     onIrAEscanear: (sesion: DSesion) => void;
     onVerAsistencias: (sesion: DSesion) => void;
+    onVerHistorial: () => void;
+    onExportarReporte: () => void;
 };
 
 // Props de la vista de formulario de creación
