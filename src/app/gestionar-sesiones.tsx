@@ -1,4 +1,4 @@
-import { PGestionarSesiones } from '@/Presentacion/PGestionarSesiones';
+import { PGestionarSesiones } from '@/Presentacion/GestionarSesiones/PGestionarSesiones';
 
 export default function GestionarSesionesScreen() {
     return <PGestionarSesiones />;

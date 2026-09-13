@@ -11,10 +11,10 @@ import { Spacing } from '@/constants/theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EncabezadoPantalla } from '@/Presentacion/componentes/EncabezadoPantalla';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
-import { VistaExitoImportacion } from '@/Presentacion/ImportarLista/VistaExitoImportacion';
-import { VistaPreviaImportacion } from '@/Presentacion/ImportarLista/VistaPreviaImportacion';
-import { VistaSelectorArchivo } from '@/Presentacion/ImportarLista/VistaSelectorArchivo';
-import { resultadoInicial, type Paso } from '@/Presentacion/ImportarLista/tipos';
+import { VistaExitoImportacion } from './VistaExitoImportacion';
+import { VistaPreviaImportacion } from './VistaPreviaImportacion';
+import { VistaSelectorArchivo } from './VistaSelectorArchivo';
+import { resultadoInicial, type Paso } from './tipos';
 import { useImportacion } from '@/Negocio/NNomina';
 import type { ResultadoImportacion } from '@/Negocio/NNomina';
 

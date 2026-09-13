@@ -25,7 +25,6 @@ export interface AsistenciaRegistrada {
     nombre: string;
     apellidoPaterno: string | null;
     apellidoMaterno: string | null;
-    foto: string | null;
 }
 
 export class DAsistencia {
@@ -75,7 +74,7 @@ export class DAsistencia {
     static listarAsistenciaDeSesion(idSesion: number): AsistenciaRegistrada[] {
         const resultado = baseDatos.executeSync(
             `SELECT a.id, a.id_sesion, a.id_estudiante, a.estado, a.metodo, a.rssi, a.fecha_hora,
-                    e.registro, e.nombre, e.apellido_paterno, e.apellido_materno, e.foto
+                     e.registro, e.nombre, e.apellido_paterno, e.apellido_materno
                FROM asistencia a
                JOIN estudiante e ON e.id = a.id_estudiante
               WHERE a.id_sesion = ?
@@ -99,7 +98,6 @@ export class DAsistencia {
             nombre: String(fila.nombre),
             apellidoPaterno: fila.apellido_paterno != null ? String(fila.apellido_paterno) : null,
             apellidoMaterno: fila.apellido_materno != null ? String(fila.apellido_materno) : null,
-            foto: fila.foto != null ? String(fila.foto) : null,
         }));
     }
 

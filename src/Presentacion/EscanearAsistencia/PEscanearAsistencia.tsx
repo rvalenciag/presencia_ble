@@ -10,7 +10,7 @@ import { useEscaneoAsistencia } from '@/Negocio/NEscanearAsistencia';
 import { Spacing } from '@/constants/theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
-import { VistaEscanearAsistencia } from '@/Presentacion/EscanearAsistencia/VistaEscanearAsistencia';
+import { VistaEscanearAsistencia } from './VistaEscanearAsistencia';
 
 export function PEscanearAsistencia() {
     const { sesionId } = useLocalSearchParams<{ sesionId?: string }>();

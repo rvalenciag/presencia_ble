@@ -7,13 +7,13 @@ import { BackHandler } from 'react-native';
 import { router } from 'expo-router';
 
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
-import { VistaFormulario } from '@/Presentacion/ConfiguracionPerfil/VistaFormulario';
-import { VistaConfirmacion } from '@/Presentacion/ConfiguracionPerfil/VistaConfirmacion';
-import { VistaSeleccionRol } from '@/Presentacion/ConfiguracionPerfil/VistaSeleccionRol';
-import { datosIniciales } from '@/Presentacion/ConfiguracionPerfil/tipos';
+import { VistaFormulario } from './VistaFormulario';
+import { VistaConfirmacion } from './VistaConfirmacion';
+import { VistaSeleccionRol } from './VistaSeleccionRol';
+import { datosIniciales } from './tipos';
 import { usePerfil } from '@/Negocio/NPerfil';
 
-import type { DatosFormulario, ErroresFormulario } from '@/Presentacion/ConfiguracionPerfil/tipos';
+import type { DatosFormulario, ErroresFormulario } from './tipos';
 import type { Rol } from '@/Negocio/NPerfil';
 
 type Paso = 'ROLE_SELECTION' | 'PROFILE_FORM' | 'DASHBOARD_PREVIEW';

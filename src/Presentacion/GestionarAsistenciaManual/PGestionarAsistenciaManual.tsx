@@ -16,8 +16,8 @@ import { fechaLegible } from '@/Presentacion/GestionarSesiones/tipos';
 import { Spacing } from '@/constants/theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
-import { VistaCambiarEstado } from '@/Presentacion/GestionarAsistenciaManual/VistaCambiarEstado';
-import { VistaListaConsolidada } from '@/Presentacion/GestionarAsistenciaManual/VistaListaConsolidada';
+import { VistaCambiarEstado } from './VistaCambiarEstado';
+import { VistaListaConsolidada } from './VistaListaConsolidada';
 
 export function PGestionarAsistenciaManual() {
     const { sesionId } = useLocalSearchParams<{ sesionId?: string }>();

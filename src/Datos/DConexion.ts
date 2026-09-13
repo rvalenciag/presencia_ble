@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS perfil (
   apellido_materno TEXT,
   correo TEXT,
   carrera TEXT,
-  foto TEXT,
   uuid TEXT UNIQUE,
   fecha DATETIME DEFAULT (datetime('now', 'localtime'))
 );
@@ -45,7 +44,6 @@ CREATE TABLE IF NOT EXISTS estudiante (
   plan TEXT,
   telefono TEXT,
   correo TEXT,
-  foto TEXT,
   uuid TEXT UNIQUE,
   fecha DATETIME DEFAULT (datetime('now', 'localtime'))
 );

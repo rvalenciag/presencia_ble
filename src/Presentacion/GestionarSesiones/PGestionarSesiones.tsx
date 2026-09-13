@@ -14,14 +14,14 @@ import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EncabezadoPantalla } from '@/Presentacion/componentes/EncabezadoPantalla';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
-import { VistaFormularioSesion } from '@/Presentacion/GestionarSesiones/VistaFormularioSesion';
-import { VistaListaSesiones } from '@/Presentacion/GestionarSesiones/VistaListaSesiones';
+import { VistaFormularioSesion } from './VistaFormularioSesion';
+import { VistaListaSesiones } from './VistaListaSesiones';
 import {
     datosIniciales,
     fechaLegible,
     type DatosFormulario,
     type Vista,
-} from '@/Presentacion/GestionarSesiones/tipos';
+} from './tipos';
 import { useSesiones, type DSesion } from '@/Negocio/NSesion';
 
 export function PGestionarSesiones() {

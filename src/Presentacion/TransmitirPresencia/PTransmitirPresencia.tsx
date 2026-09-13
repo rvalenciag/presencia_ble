@@ -12,7 +12,7 @@ import { Spacing } from '@/constants/theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
-import { VistaTransmitirPresencia } from '@/Presentacion/TransmitirPresencia/VistaTransmitirPresencia';
+import { VistaTransmitirPresencia } from './VistaTransmitirPresencia';
 
 export function PTransmitirPresencia() {
     const { grupoId } = useLocalSearchParams<{ grupoId?: string }>();

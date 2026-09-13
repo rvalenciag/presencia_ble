@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
-import { VistaEnrolamiento } from '@/Presentacion/HabilitarEnrolamiento/VistaEnrolamiento';
+import { VistaEnrolamiento } from './VistaEnrolamiento';
 import { useEnrolamiento } from '@/Negocio/NEnrolamiento';
 
 export function PHabilitarEnrolamiento() {

@@ -20,9 +20,9 @@ import { useTheme } from '@/hooks/use-theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
-import { VistaExitoReporte } from '@/Presentacion/ExportarReporte/VistaExitoReporte';
-import { VistaFormularioReporte } from '@/Presentacion/ExportarReporte/VistaFormularioReporte';
-import type { MotivoExcepcion, VistaReporte } from '@/Presentacion/ExportarReporte/tipos';
+import { VistaExitoReporte } from './VistaExitoReporte';
+import { VistaFormularioReporte } from './VistaFormularioReporte';
+import type { MotivoExcepcion, VistaReporte } from './tipos';
 
 export function PExportarReporte() {
     const theme = useTheme();

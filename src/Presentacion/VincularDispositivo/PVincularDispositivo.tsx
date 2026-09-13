@@ -10,8 +10,8 @@ import { Linking } from 'react-native';
 
 import { useVinculacion } from '@/Negocio/NVinculacion';
 import type { MateriaDetectada } from '@/Negocio/NVinculacion';
-import { VistaVinculacion } from '@/Presentacion/VincularDispositivo/VistaVinculacion';
-import type { Paso } from '@/Presentacion/VincularDispositivo/tipos';
+import { VistaVinculacion } from './VistaVinculacion';
+import type { Paso } from './tipos';
 
 export function PVincularDispositivo() {
     const { perfil, materiasDetectadas, seleccionarMateria, respuesta, motivoRechazo, reintentar } =

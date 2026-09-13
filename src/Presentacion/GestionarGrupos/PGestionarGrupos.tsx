@@ -9,16 +9,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
-import { VistaFormularioGrupo } from '@/Presentacion/GestionarGrupos/VistaFormularioGrupo';
-import { VistaListaGrupos } from '@/Presentacion/GestionarGrupos/VistaListaGrupos';
-import { datosIniciales } from '@/Presentacion/GestionarGrupos/tipos';
+import { VistaFormularioGrupo } from './VistaFormularioGrupo';
+import { VistaListaGrupos } from './VistaListaGrupos';
+import { datosIniciales } from './tipos';
 import { useGrupos } from '@/Negocio/NGrupo';
 
 import type {
     DatosFormulario,
     ErroresFormulario,
     Vista,
-} from '@/Presentacion/GestionarGrupos/tipos';
+} from './tipos';
 import type { DGrupo } from '@/Negocio/NGrupo';
 
 // Valida el formulario según el spec; devuelve los errores por campo (vacío = todo bien)

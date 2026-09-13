@@ -11,15 +11,15 @@ import { Spacing } from '@/constants/theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EncabezadoPantalla } from '@/Presentacion/componentes/EncabezadoPantalla';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
-import { VistaFormularioEstudiante } from '@/Presentacion/GestionarEstudiantes/VistaFormularioEstudiante';
-import { VistaListaEstudiantes } from '@/Presentacion/GestionarEstudiantes/VistaListaEstudiantes';
+import { VistaFormularioEstudiante } from './VistaFormularioEstudiante';
+import { VistaListaEstudiantes } from './VistaListaEstudiantes';
 import {
     datosIniciales,
     formularioDeAlumno,
     type DatosFormulario,
     type ErroresFormulario,
     type Vista,
-} from '@/Presentacion/GestionarEstudiantes/tipos';
+} from './tipos';
 import { useGestionEstudiantes } from '@/Negocio/NEstudiante';
 import type { AlumnoDeGrupo, CambiosEstudiante } from '@/Negocio/NEstudiante';
 

@@ -11,10 +11,10 @@ import { useHistorial, type ResumenAlumno } from '@/Negocio/NAsistencia';
 import { Spacing } from '@/constants/theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
-import { VistaDetalleEstudiante } from '@/Presentacion/HistorialAsistencias/VistaDetalleEstudiante';
-import { VistaHistorialDocente } from '@/Presentacion/HistorialAsistencias/VistaHistorialDocente';
-import { VistaHistorialEstudiante } from '@/Presentacion/HistorialAsistencias/VistaHistorialEstudiante';
-import type { VistaHistorial } from '@/Presentacion/HistorialAsistencias/tipos';
+import { VistaDetalleEstudiante } from './VistaDetalleEstudiante';
+import { VistaHistorialDocente } from './VistaHistorialDocente';
+import { VistaHistorialEstudiante } from './VistaHistorialEstudiante';
+import type { VistaHistorial } from './tipos';
 
 export function PHistorialAsistencias() {
     const { grupoId } = useLocalSearchParams<{ grupoId?: string }>();

@@ -13,7 +13,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { useGrupos, type GrupoEstudiante } from '@/Negocio/NGrupo';
 import { usePerfil } from '@/Negocio/NPerfil';
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
-import { VistaMisGrupos } from '@/Presentacion/MisGruposEstudiante/VistaMisGrupos';
+import { VistaMisGrupos } from './VistaMisGrupos';
 
 export function PMisGruposEstudiante() {
     const theme = useTheme();

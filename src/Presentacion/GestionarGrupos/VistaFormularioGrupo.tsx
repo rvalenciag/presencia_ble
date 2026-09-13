@@ -8,7 +8,7 @@ import { Spacing } from '@/constants/theme';
 import { BotonAccion } from '@/Presentacion/componentes/BotonAccion';
 import { CampoTexto } from '@/Presentacion/componentes/CampoTexto';
 import { EncabezadoPantalla } from '@/Presentacion/componentes/EncabezadoPantalla';
-import type { DatosFormulario, ErroresFormulario } from '@/Presentacion/GestionarGrupos/tipos';
+import type { DatosFormulario, ErroresFormulario } from './tipos';
 
 type PropsVistaFormularioGrupo = {
     modo: 'FORM_CREATE' | 'FORM_EDIT';
