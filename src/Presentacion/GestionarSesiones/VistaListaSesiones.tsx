@@ -15,7 +15,7 @@ import { Insignia } from '@/Presentacion/componentes/Insignia';
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
 import { TarjetaPrensa } from '@/Presentacion/componentes/TarjetaPrensa';
 import { ThemedText } from '@/Presentacion/componentes/ThemedText';
-import type { DSesion } from '@/Negocio/NSesion';
+import type { Sesion } from '@/Negocio/NSesion';
 import { fechaLegible, type PropsVistaListaSesiones } from './tipos';
 
 export function VistaListaSesiones({
@@ -32,7 +32,7 @@ export function VistaListaSesiones({
     onExportarReporte,
 }: PropsVistaListaSesiones) {
     const theme = useTheme();
-    const [sesionModal, setSesionModal] = useState<DSesion | null>(null);
+    const [sesionModal, setSesionModal] = useState<Sesion | null>(null);
 
     // La sesión activa se muestra en el banner; las demás en la lista
     const sesionesLista = sesionActiva

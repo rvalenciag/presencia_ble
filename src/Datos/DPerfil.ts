@@ -20,7 +20,7 @@ export class DPerfil {
     uuid: string = '';
 
     // Convierte una fila cruda de SQLite en un DPerfil con sus atributos llenos
-    static desdeFila(fila: Record<string, unknown>): DPerfil {
+    static mapearFila(fila: Record<string, unknown>): DPerfil {
         const perfil = new DPerfil();
         perfil.registro = String(fila.registro);
         perfil.rol = (fila.rol === 'DOCENTE' ? 'DOCENTE' : 'ESTUDIANTE') as Rol;
@@ -38,7 +38,7 @@ export class DPerfil {
         const resultado = baseDatos.executeSync('SELECT * FROM perfil LIMIT 1;');
         const fila = resultado.rows[0];
         if (!fila) return null;
-        return DPerfil.desdeFila(fila);
+        return DPerfil.mapearFila(fila);
     }
 
     // Guarda el perfil (si ya existía uno con el mismo registro, lo reemplaza)

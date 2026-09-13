@@ -19,7 +19,8 @@ import type {
     ErroresFormulario,
     Vista,
 } from './tipos';
-import type { DGrupo } from '@/Negocio/NGrupo';
+
+import type { Grupo } from '@/Negocio/NGrupo';
 
 // Valida el formulario según el spec; devuelve los errores por campo (vacío = todo bien)
 function validarFormulario(formData: DatosFormulario): ErroresFormulario {
@@ -41,7 +42,7 @@ export function PGestionarGrupos() {
     const { grupos, conteoPorGrupo, crearGrupo, actualizarGrupo, eliminarGrupo } = useGrupos();
 
     const [vista, setVista] = useState<Vista>('LIST');
-    const [grupoSeleccionado, setGrupoSeleccionado] = useState<DGrupo | null>(null);
+    const [grupoSeleccionado, setGrupoSeleccionado] = useState<Grupo | null>(null);
     const [formData, setFormData] = useState<DatosFormulario>(datosIniciales);
     const [errors, setErrors] = useState<ErroresFormulario>({});
 
@@ -56,7 +57,7 @@ export function PGestionarGrupos() {
         setVista('FORM_CREATE');
     };
 
-    const abrirEdicion = (grupo: DGrupo) => {
+    const abrirEdicion = (grupo: Grupo) => {
         setGrupoSeleccionado(grupo);
         setFormData({
             nombre: grupo.nombre,
@@ -101,7 +102,7 @@ export function PGestionarGrupos() {
         setVista('LIST');
     };
 
-    const abrirBorrado = (grupo: DGrupo) => {
+    const abrirBorrado = (grupo: Grupo) => {
         setGrupoSeleccionado(grupo);
         setVista('MODAL_DELETE');
     };
@@ -119,7 +120,7 @@ export function PGestionarGrupos() {
         setVista('LIST');
     };
 
-    const entrarAlGrupo = (grupo: DGrupo) => {
+    const entrarAlGrupo = (grupo: Grupo) => {
         router.push({ pathname: '/gestionar-estudiantes', params: { grupoId: String(grupo.id) } });
     };
 

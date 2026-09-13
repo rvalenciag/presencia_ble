@@ -22,7 +22,6 @@ import {
 import type { CanalBLE } from '@/Negocio/Servicio/BluetoothServicio';
 
 // Tipos que las vistas de CU06 importan desde Negocio
-export type { DPerfil } from '@/Datos/DPerfil';
 export type { MateriaDetectada, RespuestaVinculacion } from '@/Datos/DGrupoEstudiante';
 
 // Después de anunciar la identidad, el teléfono queda este tiempo en modo solo

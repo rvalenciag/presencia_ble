@@ -12,7 +12,7 @@ export class DGrupo {
     anio: number | null = null;
 
     // Convierte una fila cruda de SQLite en un DGrupo con sus atributos llenos
-    static desdeFila(fila: Record<string, unknown>): DGrupo {
+    static mapearFila(fila: Record<string, unknown>): DGrupo {
         const grupo = new DGrupo();
         grupo.id = Number(fila.id);
         grupo.nombre = String(fila.nombre);
@@ -25,14 +25,14 @@ export class DGrupo {
     // Lista todos los grupos de la materia (SELECT * FROM grupo, en orden de inserción)
     static listarGrupos(): DGrupo[] {
         const resultado = baseDatos.executeSync('SELECT * FROM grupo;');
-        return (resultado.rows as Record<string, unknown>[]).map(DGrupo.desdeFila);
+        return (resultado.rows as Record<string, unknown>[]).map(DGrupo.mapearFila);
     }
 
     // Devuelve un grupo por su id (para el encabezado de CU03/CU04) o null si no existe
     static obtenerGrupoPorId(idGrupo: number): DGrupo | null {
         const resultado = baseDatos.executeSync('SELECT * FROM grupo WHERE id = ?;', [idGrupo]);
         const filas = resultado.rows as Record<string, unknown>[];
-        return filas.length > 0 ? DGrupo.desdeFila(filas[0]) : null;
+        return filas.length > 0 ? DGrupo.mapearFila(filas[0]) : null;
     }
 
     // Crea un grupo nuevo y devuelve el grupo ya con su id (INSERT → insertId autogenerado)

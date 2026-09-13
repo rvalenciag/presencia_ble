@@ -32,8 +32,6 @@ export type {
     EstadoAsistencia,
     MetodoAsistencia,
 } from '@/Datos/DAsistencia';
-export type { DGrupo } from '@/Datos/DGrupo';
-export type { DPerfil } from '@/Datos/DPerfil';
 
 // Los pasos de pantalla del spec CU10 (mismos nombres que en los .md)
 export type PasoTransmision =

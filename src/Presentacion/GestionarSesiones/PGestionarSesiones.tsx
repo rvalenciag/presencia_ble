@@ -22,7 +22,7 @@ import {
     type DatosFormulario,
     type Vista,
 } from './tipos';
-import { useSesiones, type DSesion } from '@/Negocio/NSesion';
+import { useSesiones, type Sesion } from '@/Negocio/NSesion';
 
 export function PGestionarSesiones() {
     const theme = useTheme();
@@ -35,7 +35,7 @@ export function PGestionarSesiones() {
     const [vista, setVista] = useState<Vista>('LIST');
     const [formData, setFormData] = useState<DatosFormulario>(datosIniciales);
     const [errorTitulo, setErrorTitulo] = useState('');
-    const [sesionSeleccionada, setSesionSeleccionada] = useState<DSesion | null>(null);
+    const [sesionSeleccionada, setSesionSeleccionada] = useState<Sesion | null>(null);
 
     // Sin grupo activo todavía no hay sesiones que gestionar
     if (!grupo) {
@@ -104,7 +104,7 @@ export function PGestionarSesiones() {
         setVista('LIST');
     };
 
-    const abrirBorrado = (sesion: DSesion) => {
+    const abrirBorrado = (sesion: Sesion) => {
         setSesionSeleccionada(sesion);
         setVista('MODAL_DELETE');
     };
@@ -120,11 +120,11 @@ export function PGestionarSesiones() {
         setVista('LIST');
     };
 
-    const irAEscanear = (sesion: DSesion) => {
+    const irAEscanear = (sesion: Sesion) => {
         router.push({ pathname: '/escanear-asistencia', params: { sesionId: String(sesion.id) } });
     };
 
-    const verAsistencias = (sesion: DSesion) => {
+    const verAsistencias = (sesion: Sesion) => {
         router.push({
             pathname: '/gestionar-asistencia-manual',
             params: { sesionId: String(sesion.id) },

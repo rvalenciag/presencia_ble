@@ -14,7 +14,6 @@ export type MetodoAsistencia = 'BLE_AUTOMATICO' | 'MANUAL';
 // Una marcación tal como se lee de la BD: el JOIN con estudiante trae la identidad
 // del alumno (la usan CU11 para recargar la lista y CU12/CU13 para el historial)
 export interface AsistenciaRegistrada {
-    id: number;
     idSesion: number;
     idEstudiante: number;
     estado: EstadoAsistencia;
@@ -28,8 +27,7 @@ export interface AsistenciaRegistrada {
 }
 
 export class DAsistencia {
-    // Atributos: espejo de la tabla asistencia
-    id: number = 0;
+    // Atributos: espejo de la tabla asistencia (PK compuesta: id_sesion + id_estudiante)
     idSesion: number = 0;
     idEstudiante: number = 0;
     estado: EstadoAsistencia = 'AUSENTE';
@@ -73,16 +71,15 @@ export class DAsistencia {
     // Lista las marcaciones de una sesión con los datos del alumno (más recientes primero)
     static listarAsistenciaDeSesion(idSesion: number): AsistenciaRegistrada[] {
         const resultado = baseDatos.executeSync(
-            `SELECT a.id, a.id_sesion, a.id_estudiante, a.estado, a.metodo, a.rssi, a.fecha_hora,
+            `SELECT a.id_sesion, a.id_estudiante, a.estado, a.metodo, a.rssi, a.fecha_hora,
                      e.registro, e.nombre, e.apellido_paterno, e.apellido_materno
                FROM asistencia a
                JOIN estudiante e ON e.id = a.id_estudiante
               WHERE a.id_sesion = ?
-              ORDER BY a.fecha_hora DESC, a.id DESC;`,
+               ORDER BY a.fecha_hora DESC, a.rowid DESC;`,
             [idSesion],
         );
         return (resultado.rows as Record<string, unknown>[]).map((fila) => ({
-            id: Number(fila.id),
             idSesion: Number(fila.id_sesion),
             idEstudiante: Number(fila.id_estudiante),
             estado:

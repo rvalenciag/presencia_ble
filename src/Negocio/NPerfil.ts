@@ -11,14 +11,17 @@ import { DDispositivo } from '@/Datos/DDispositivo';
 import { escucharEstadoBluetooth, obtenerEstadoBluetooth } from '@/Negocio/Servicio/BluetoothServicio';
 
 // Tipos que las vistas del CU01 importan desde Negocio (versión publicada de Datos)
-export type { DPerfil, Rol } from '@/Datos/DPerfil';
+export type { Rol } from '@/Datos/DPerfil';
+
+// Alias publicado para vistas (misma forma que DPerfil; independizable sin tocar vistas)
+export type Perfil = DPerfil;
 
 // Lo que devuelve el hook usePerfil
 export interface RespuestaUsePerfil {
-    perfil: DPerfil | null;
+    perfil: Perfil | null;
     uuidDispositivo: string;
     bluetoothEncendido: boolean | null;
-    guardarPerfil: (perfil: DPerfil) => void;
+    guardarPerfil: (perfil: Perfil) => void;
 }
 
 export function usePerfil(): RespuestaUsePerfil {

@@ -33,7 +33,6 @@ import type {
 
 // Tipos que las vistas de CU05 importan desde Negocio
 export type { AlumnoEnrolamiento } from '@/Datos/DEstudiante';
-export type { DGrupo } from '@/Datos/DGrupo';
 
 // Cadencia del faro: cada cuánto se vuelve a anunciar la materia (MATERIA + chunks META).
 // Anunciar y escanear a la vez no es efectivo en BLE: por eso se emite en RÁFAGAS y

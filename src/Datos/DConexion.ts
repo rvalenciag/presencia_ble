@@ -68,20 +68,18 @@ CREATE TABLE IF NOT EXISTS sesion (
 );
 
 CREATE TABLE IF NOT EXISTS asistencia (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
   id_sesion INTEGER NOT NULL,
   id_estudiante INTEGER NOT NULL,
   estado TEXT DEFAULT 'AUSENTE' CHECK(estado IN ('PRESENTE', 'AUSENTE', 'LICENCIA')),
   metodo TEXT DEFAULT 'BLE_AUTOMATICO' CHECK(metodo IN ('BLE_AUTOMATICO', 'MANUAL')),
   rssi INTEGER,
   fecha_hora DATETIME DEFAULT (datetime('now', 'localtime')),
-  CONSTRAINT uq_sesion_estudiante UNIQUE (id_sesion, id_estudiante),
+  PRIMARY KEY (id_sesion, id_estudiante),
   FOREIGN KEY (id_sesion) REFERENCES sesion(id) ON DELETE CASCADE,
   FOREIGN KEY (id_estudiante) REFERENCES estudiante(id) ON DELETE CASCADE
 );
 
 CREATE INDEX IF NOT EXISTS idx_estudiante_uuid ON estudiante(uuid);
-CREATE INDEX IF NOT EXISTS idx_asistencia_sesion_estudiante ON asistencia(id_sesion, id_estudiante);
 CREATE INDEX IF NOT EXISTS idx_sesion_grupo ON sesion(id_grupo);
 `;
 

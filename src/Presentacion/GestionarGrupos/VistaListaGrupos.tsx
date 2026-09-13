@@ -12,15 +12,15 @@ import { EstadoVacio } from '@/Presentacion/componentes/EstadoVacio';
 import { Insignia } from '@/Presentacion/componentes/Insignia';
 import { TarjetaPrensa } from '@/Presentacion/componentes/TarjetaPrensa';
 import { ThemedText } from '@/Presentacion/componentes/ThemedText';
-import type { DGrupo } from '@/Negocio/NGrupo';
+import type { Grupo } from '@/Negocio/NGrupo';
 
 type PropsVistaListaGrupos = {
-    grupos: DGrupo[];
+    grupos: Grupo[];
     conteoPorGrupo: Record<number, number>;
     onCrearGrupo: () => void;
-    onEditarGrupo: (grupo: DGrupo) => void;
-    onBorrarGrupo: (grupo: DGrupo) => void;
-    onEntrarGrupo: (grupo: DGrupo) => void;
+    onEditarGrupo: (grupo: Grupo) => void;
+    onBorrarGrupo: (grupo: Grupo) => void;
+    onEntrarGrupo: (grupo: Grupo) => void;
 };
 
 export function VistaListaGrupos({

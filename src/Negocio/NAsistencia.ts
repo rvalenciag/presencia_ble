@@ -40,9 +40,8 @@ export type {
     ResumenAlumno,
     SesionReporte,
 } from '@/Datos/DAsistencia';
-export type { DGrupo } from '@/Datos/DGrupo';
-export type { DPerfil, Rol } from '@/Datos/DPerfil';
-export type { DSesion, EstadoSesion } from '@/Datos/DSesion';
+export type { Rol } from '@/Datos/DPerfil';
+export type { EstadoSesion } from '@/Datos/DSesion';
 
 // El nombre completo de un alumno de la nómina (nombre + apellidos, sin espacios sobrantes)
 function nombreCompletoDe(alumno: {

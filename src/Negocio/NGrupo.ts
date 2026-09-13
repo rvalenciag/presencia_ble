@@ -16,13 +16,16 @@ import { DGrupoEstudiante } from '@/Datos/DGrupoEstudiante';
 import type { GrupoEstudiante } from '@/Datos/DGrupoEstudiante';
 
 // Tipos que las vistas de grupos importan desde Negocio
-export type { DatosNuevoGrupo, DGrupo } from '@/Datos/DGrupo';
+export type { DatosNuevoGrupo } from '@/Datos/DGrupo';
 export type { GrupoEstudiante } from '@/Datos/DGrupoEstudiante';
+
+// Alias publicado para vistas (misma forma que DGrupo; independizable sin tocar vistas)
+export type Grupo = DGrupo;
 
 // Lo que devuelve el hook useGrupos (CU02 del docente y CU07/CU08 del estudiante)
 export interface RespuestaUseGrupos {
     // CU02 (lado docente): los grupos que el docente administra
-    grupos: DGrupo[];
+    grupos: Grupo[];
     // CU02: cantidad de alumnos por grupo (id_grupo → conteo), sin los CANCELADO
     conteoPorGrupo: Record<number, number>;
     crearGrupo: (datos: DatosNuevoGrupo) => void;

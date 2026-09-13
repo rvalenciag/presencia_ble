@@ -15,7 +15,7 @@ export class DSesion {
     fechaHora: string | null = null;
 
     // Convierte una fila cruda de SQLite en una DSesion con sus atributos llenos
-    static desdeFila(fila: Record<string, unknown>): DSesion {
+    static mapearFila(fila: Record<string, unknown>): DSesion {
         const sesion = new DSesion();
         sesion.id = Number(fila.id);
         sesion.idGrupo = Number(fila.id_grupo);
@@ -31,7 +31,7 @@ export class DSesion {
             'SELECT * FROM sesion WHERE id_grupo = ? ORDER BY fecha_hora DESC, id DESC;',
             [idGrupo],
         );
-        return (resultado.rows as Record<string, unknown>[]).map(DSesion.desdeFila);
+        return (resultado.rows as Record<string, unknown>[]).map(DSesion.mapearFila);
     }
 
     // Devuelve una sesión por su id (CU11 la resuelve para escanear; CU10 lee el
@@ -39,7 +39,7 @@ export class DSesion {
     static obtenerSesionPorId(idSesion: number): DSesion | null {
         const resultado = baseDatos.executeSync('SELECT * FROM sesion WHERE id = ?;', [idSesion]);
         const filas = resultado.rows as Record<string, unknown>[];
-        return filas.length > 0 ? DSesion.desdeFila(filas[0]) : null;
+        return filas.length > 0 ? DSesion.mapearFila(filas[0]) : null;
     }
 
     // Crea una sesión con estado ABIERTA y fecha/hora automática (CU09: Abrir Sesión)
@@ -51,7 +51,7 @@ export class DSesion {
         const filas = baseDatos.executeSync('SELECT * FROM sesion WHERE id = ?;', [
             Number(resultado.insertId ?? 0),
         ]).rows as Record<string, unknown>[];
-        return DSesion.desdeFila(filas[0]);
+        return DSesion.mapearFila(filas[0]);
     }
 
     // Cierra una sesión activa (UPDATE estado a CERRADA)

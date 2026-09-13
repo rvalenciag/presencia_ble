@@ -11,10 +11,10 @@ import { EncabezadoPantalla } from '@/Presentacion/componentes/EncabezadoPantall
 import { Insignia } from '@/Presentacion/componentes/Insignia';
 import { ThemedText } from '@/Presentacion/componentes/ThemedText';
 import { Tonos } from '@/Presentacion/componentes/Colores';
-import type { DGrupo } from '@/Negocio/NGrupo';
+import type { Grupo } from '@/Negocio/NGrupo';
 
 type PropsVistaSelectorArchivo = {
-    grupo: DGrupo;
+    grupo: Grupo;
     errorMensaje: string | null;
     onRegresar: () => void;
     onBuscar: () => void;

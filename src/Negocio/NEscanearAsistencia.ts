@@ -37,7 +37,6 @@ export type {
     MetodoAsistencia,
 } from '@/Datos/DAsistencia';
 export type { AlumnoDeGrupo } from '@/Datos/DEstudiante';
-export type { DGrupo } from '@/Datos/DGrupo';
 export type { DSesion, EstadoSesion } from '@/Datos/DSesion';
 
 // Los pasos de pantalla del spec CU11 (mismos nombres que en los .md)

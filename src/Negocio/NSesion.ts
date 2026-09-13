@@ -10,15 +10,17 @@ import { DSesion } from '@/Datos/DSesion';
 import { DGrupo } from '@/Datos/DGrupo';
 
 // Tipos que las vistas del CU09 importan desde Negocio (versión publicada de Datos)
-export type { DSesion, EstadoSesion } from '@/Datos/DSesion';
-export type { DGrupo } from '@/Datos/DGrupo';
+export type { EstadoSesion } from '@/Datos/DSesion';
+
+// Alias publicado para vistas (misma forma que DSesion; independizable sin tocar vistas)
+export type Sesion = DSesion;
 
 // Lo que devuelve el hook useSesiones
 export interface RespuestaUseSesiones {
     grupo: DGrupo | null;
-    sesiones: DSesion[];
-    sesionActiva: DSesion | null;
-    crearSesion: (titulo: string) => DSesion | null;
+    sesiones: Sesion[];
+    sesionActiva: Sesion | null;
+    crearSesion: (titulo: string) => Sesion | null;
     cerrarSesion: (idSesion: number) => void;
     eliminarSesion: (idSesion: number) => void;
 }

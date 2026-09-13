@@ -1,6 +1,7 @@
 // Tipos y datos compartidos por las vistas de CU09 (sesiones de clase del grupo).
 
-import type { DGrupo, DSesion } from '@/Negocio/NSesion';
+import type { Grupo } from '@/Negocio/NGrupo';
+import type { Sesion } from '@/Negocio/NSesion';
 
 // Las vistas del spec: lista (con modal de borrado) y formulario de creación
 export type Vista = 'LIST' | 'FORM_CREATE' | 'MODAL_DELETE';
@@ -31,15 +32,15 @@ export function fechaLegible(fechaHora: string | null): string {
 
 // Props de la vista de lista (incluye modal de borrado)
 export type PropsVistaListaSesiones = {
-    grupo: DGrupo;
-    sesiones: DSesion[];
-    sesionActiva: DSesion | null;
+    grupo: Grupo;
+    sesiones: Sesion[];
+    sesionActiva: Sesion | null;
     onRegresar: () => void;
     onAgregarSesion: () => void;
     onCerrarSesion: (idSesion: number) => void;
-    onBorrarSesion: (sesion: DSesion) => void;
-    onIrAEscanear: (sesion: DSesion) => void;
-    onVerAsistencias: (sesion: DSesion) => void;
+    onBorrarSesion: (sesion: Sesion) => void;
+    onIrAEscanear: (sesion: Sesion) => void;
+    onVerAsistencias: (sesion: Sesion) => void;
     onVerHistorial: () => void;
     onExportarReporte: () => void;
 };

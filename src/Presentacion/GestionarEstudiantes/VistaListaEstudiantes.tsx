@@ -15,11 +15,11 @@ import { Insignia } from '@/Presentacion/componentes/Insignia';
 import { ModalConfirmacion } from '@/Presentacion/componentes/ModalConfirmacion';
 import { TarjetaPrensa } from '@/Presentacion/componentes/TarjetaPrensa';
 import { ThemedText } from '@/Presentacion/componentes/ThemedText';
-import type { DGrupo } from '@/Negocio/NGrupo';
+import type { Grupo } from '@/Negocio/NGrupo';
 import { textoCarrera, type AlumnoDeGrupo } from '@/Negocio/NEstudiante';
 
 type PropsVistaListaEstudiantes = {
-    grupo: DGrupo;
+    grupo: Grupo;
     alumnos: AlumnoDeGrupo[];
     onRegresar: () => void;
     onAgregar: () => void;
